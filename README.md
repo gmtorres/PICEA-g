@@ -50,4 +50,4 @@ pc.run(200)
 pc.get_archive_front()
 ```
 
-![Non-dominated Solutions](https://github.com/gmtorres/PICEA-g/figures/NDS.png)
+![Non-dominated Solutions](https://github.com/gmtorres/PICEA-g/blob/master/figures/NDS.png)

@@ -43,7 +43,7 @@ class Solution_Vector(NDS):
         return self.interval
 
 class PICEA:
-    def __init__(self, constructor, genetic_operator, objectives, N = 10, Ng = 10, cArch = 10):
+    def __init__(self, constructor, genetic_operator, objectives, N = 10, Ng = 10, cArch = 10, distance_function = None):
         self.N = N # number of solutions
         self.Ng = Ng # number of goals
         self.cArch = cArch
@@ -53,6 +53,7 @@ class PICEA:
         self.genetic_operator = genetic_operator
         self.objectives = objectives
         self.M = len(self.objectives)
+        self.distance_function = distance_function
 
         self.init_sol(constructor)
     
@@ -231,11 +232,11 @@ class PICEA:
         Gn = Gn[:self.Ng]
         return Gn
 
-    def geneticOperator(self, mating = False, scaling = None): # gerar offsprings, a modificar
+    def geneticOperator(self, scaling = 2): # gerar offsprings, a modificar
         Sc = []
         for s1 in self.S:
             s2 = None
-            if not mating:
+            if self.distance_function == None:
                 s2 = random.choice(self.S)
             else:
                 prob = []
@@ -243,7 +244,7 @@ class PICEA:
                     if s == s1:
                         prob.append(0)
                     else:
-                        prob.append(s1.solution.get_distance(s.solution))
+                        prob.append(self.get_distance(s.solution))
                 sum_prob = sum(prob)
                 if scaling:
                     avg = sum_prob/len(prob)
@@ -259,10 +260,10 @@ class PICEA:
             Sc.append(Solution_Vector(offspring, self.objectives))
         return Sc
 
-    def run(self, max_iter = 100, mr = True):
+    def run(self, max_iter = 100, selection_pressure = 2):
         for _ in range(max_iter):
             print(_)
-            Sc = self.geneticOperator(mr, 2)
+            Sc = self.geneticOperator(selection_pressure)
             JointS = self.S + Sc
             Gc = self.goalGenerator(self.gBounds)
             JointG = self.G + Gc

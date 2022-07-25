@@ -1,6 +1,6 @@
 # PICEA-g
 
-A Preference Inspired Co-Evolutionary Algorithm using Goal vectors framework in Python. It aims to solve Multi-Objective Problems and succed in Many-Objective Problems. A set of non-dominated solutions is returned representing an approximation to the Pareto-Front.
+A Preference Inspired Co-Evolutionary Algorithm using Goal vectors framework in Python. It aims to solve Multi-Objective Problems and has success in Many-Objective Problems. A set of non-dominated solutions is returned representing an approximation to the Pareto-Front.
 
 It also supports mating restriction, thus providing a frameowkr for the PICEA-g-mr. A linear scaling is employed over the solutions and a Rolette Wheel selection.
 
